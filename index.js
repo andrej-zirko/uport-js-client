@@ -36,7 +36,7 @@ const tryRequire = (path) => {
 
 const uportIdentity = require('uport-identity')
 const RegistryArtifact = require('uport-registry')
-const IdentityManagerArtifact = uportIdentity.IdentityManager.v1
+const IdentityManagerArtifact = uportIdentity.IdentityManager.v2
 
 // TODO need to import identity manager Adresses
 
@@ -321,7 +321,7 @@ class UPortClient {
             .then(this.getReceipt.bind(this))
             .then(receipt => {
               const log = receipt.logs[0]
-              const createEventAbi = IdentityManager.abi.filter(obj => obj.type === 'event' && obj.name ==='IdentityCreated')[0]
+              const createEventAbi = IdentityManager.abi.filter(obj => obj.type === 'event' && obj.name ==='LogIdentityCreated')[0]
               this.id = decodeEvent(createEventAbi, log.data, log.topics).identity
               this.mnid = mnid.encode({ network: this.network.id, address: this.id })
               this.initTransactionSigner(IdentityManagerAdress)
