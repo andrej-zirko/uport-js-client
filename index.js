@@ -320,7 +320,6 @@ class UPortClient {
     return this.consume(uri)
             .then(this.getReceipt.bind(this))
             .then(receipt => {
-              console.log('!!! ' + JSON.stringify(receipt))
               const log = receipt.logs[0]
               const createEventAbi = IdentityManager.abi.filter(obj => obj.type === 'event' && obj.name ==='LogIdentityCreated')[0]
               this.id = decodeEvent(createEventAbi, log.data, log.topics).identity
